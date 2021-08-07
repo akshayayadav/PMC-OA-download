@@ -23,7 +23,6 @@ def execute_download(ids_list_filename):
     for line in ids_list_file:
         line = line.rstrip()
         download_PMC_OA_file(line)
-        break
     ids_list_file.close()
 
 execute_download("PMC_ids_list.txt")

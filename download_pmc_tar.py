@@ -2,6 +2,7 @@ import requests
 import re
 import wget
 import os
+import time
 
 def download_PMC_OA_file(pmc_id):
     response = requests.get("https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi?id="+pmc_id)
@@ -23,6 +24,8 @@ def execute_download(ids_list_filename):
     for line in ids_list_file:
         line = line.rstrip()
         download_PMC_OA_file(line)
+        time.sleep(3)
+
     ids_list_file.close()
 
 execute_download("PMC_ids_list.txt")

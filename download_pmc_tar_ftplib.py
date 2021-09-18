@@ -1,6 +1,5 @@
 import requests
 import re
-import wget
 import os
 import time
 from ftplib import FTP
@@ -35,7 +34,7 @@ def write_local_ftp_file(dir_path, file_name):
     ftp.login()
     ftp.cwd(dir_path)
     file_name_ftp_size = ftp.size(file_name)
-    print(file_name, file_name_ftp_size)
+    print(file_name, "File size on FTP server", file_name_ftp_size)
     attempt_counter = 1
     while 1:
         print(file_name, "Downloading attempt ", str(attempt_counter))
@@ -48,6 +47,7 @@ def write_local_ftp_file(dir_path, file_name):
             return 1
         file_name_download_size = os.path.getsize(file_name)
         if file_name_download_size == file_name_ftp_size:
+            print(file_name, "File size after successful download", file_name_ftp_size)
             break
         os.remove(file_name)
         attempt_counter += 1

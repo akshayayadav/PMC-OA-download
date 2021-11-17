@@ -36,7 +36,11 @@ def write_local_ftp_file(dir_path, file_name):
     file_name_ftp_size = ftp.size(file_name)
     print(file_name, "File size on FTP server", file_name_ftp_size)
     attempt_counter = 1
+    attempt_limit = 5
     while 1:
+        if attempt_counter > attempt_limit:
+            print(file_name, "Download attempt limit reached. Skipping file")
+            break
         print(file_name, "Downloading attempt ", str(attempt_counter))
         try:
             with open(file_name, 'wb') as fp:
@@ -69,4 +73,4 @@ def execute_download(ids_list_filename):
 
     ids_list_file.close()
 
-execute_download("PMC_ids_list.txt")
+execute_download("PMC_ids_list_1.txt")
